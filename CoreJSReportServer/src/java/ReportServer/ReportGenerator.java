@@ -211,6 +211,9 @@ public class ReportGenerator {
                 break;
             case ms_xls_file:
                 preparedParams.put(JRParameter.REPORT_LOCALE, new Locale("en"));
+                if(rptOptions.RptParams.containsKey("pcwf_data_only") && rptOptions.RptParams.get("pcwf_data_only").equals("true")) {
+                    preparedParams.put(JRParameter.IS_IGNORE_PAGINATION, Boolean.TRUE);
+                }
                 CoreJSFormatUtils.Formatter.setForExport(true);
                 jasperPrint =  JasperFillManager.fillReport(rptCompiled, preparedParams, cn);
                 // create exporter instance and set input
